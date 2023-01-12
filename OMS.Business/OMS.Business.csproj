@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OMS.DataAccess\OMS.DataAccess.csproj" />
+    <ProjectReference Include="..\OMS.Models\OMS.Models.csproj" />
+  </ItemGroup>
+
+</Project>
