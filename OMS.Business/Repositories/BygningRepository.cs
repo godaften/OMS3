@@ -1,4 +1,5 @@
-﻿using OMS.Business.Repositories.Interfaces;
+﻿using AutoMapper;
+using OMS.Business.Repositories.Interfaces;
 using OMS.DataAccess;
 using OMS.DataAccess.Data;
 using OMS.Models;
@@ -13,27 +14,22 @@ namespace OMS.Business.Repositories
     public class BygningRepository : IBygningRepository
     {
         private readonly AppDbContext _db;
+        private readonly IMapper _mapper;
 
-        public BygningRepository(AppDbContext db)
+        public BygningRepository(AppDbContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
         public BygningDTO Create(BygningDTO objDTO)
         {
-            Bygning bygning = new Bygning()
-            {
-                Navn= objDTO.Navn,
-                Id=objDTO.Id,
-                CreatedDate=DateTime.Now
-            };
-            _db.Bygninger.Add(bygning);
+            var obj = _mapper.Map<BygningDTO, Bygning>(objDTO);
+
+            var addedObj = _db.Bygninger.Add(obj);
             _db.SaveChanges();
 
-            return new Bygning()
-            {
-                Navn = bygning.Navn,
-                Id = bygning.Id
-            };
+            return _mapper.Map<Bygning, BygningDTO>(addedObj.Entity);
+
         }
 
         public int Delete(int id)
