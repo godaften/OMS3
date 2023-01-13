@@ -9,47 +9,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OMS.Business.Repositories
+namespace OMS.Business.Repositories;
+
+public class BygningRepository : IBygningRepository
 {
-    public class BygningRepository : IBygningRepository
+    private readonly AppDbContext _db;
+    private readonly IMapper _mapper;
+
+    public BygningRepository(AppDbContext db, IMapper mapper)
     {
-        private readonly AppDbContext _db;
-        private readonly IMapper _mapper;
+        _db = db;
+        _mapper = mapper;
+    }
+    public BygningDTO Create(BygningDTO objDTO)
+    {
+        var obj = _mapper.Map<BygningDTO, Bygning>(objDTO);
+        obj.CreatedDate= DateTime.Now;
 
-        public BygningRepository(AppDbContext db, IMapper mapper)
+        var addedObj = _db.Bygninger.Add(obj);
+        _db.SaveChanges();
+
+        return _mapper.Map<Bygning, BygningDTO>(addedObj.Entity);
+
+    }
+
+
+    public int Delete(int id)
+    {
+        var obj = _db.Bygninger.FirstOrDefault(x => x.Id == id);
+        
+        if(obj != null)
         {
-            _db = db;
-            _mapper = mapper;
+            _db.Bygninger.Remove(obj);
+            return _db.SaveChanges();
         }
-        public BygningDTO Create(BygningDTO objDTO)
-        {
-            var obj = _mapper.Map<BygningDTO, Bygning>(objDTO);
+        return 0;
+    }
 
-            var addedObj = _db.Bygninger.Add(obj);
+    public BygningDTO Get(int id)
+    {
+        var obj = _db.Bygninger.FirstOrDefault(x => x.Id==id);
+        if(obj != null)
+        {
+           return _mapper.Map<Bygning, BygningDTO>(obj);
+        }
+        return new BygningDTO();
+    }
+
+    public IEnumerable<BygningDTO> GetAll()
+    {
+        return _mapper.Map<IEnumerable<Bygning>, IEnumerable<BygningDTO>>(_db.Bygninger);
+    }
+
+    public BygningDTO Update(BygningDTO objDTO)
+    {
+        var objFromDb = _db.Bygninger.FirstOrDefault(x => x.Id == objDTO.Id);
+        if (objFromDb != null)
+        {
+            objFromDb.Navn = objDTO.Navn;
+            _db.Bygninger.Update(objFromDb);
             _db.SaveChanges();
-
-            return _mapper.Map<Bygning, BygningDTO>(addedObj.Entity);
-
+            return _mapper.Map<Bygning, BygningDTO>(objFromDb);
         }
-
-        public int Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public BygningDTO Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<BygningDTO> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public BygningDTO Update(BygningDTO objDTO)
-        {
-            throw new NotImplementedException();
-        }
+        return objDTO;
     }
 }

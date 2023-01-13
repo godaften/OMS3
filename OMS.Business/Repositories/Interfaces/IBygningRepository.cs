@@ -13,7 +13,7 @@ public interface IBygningRepository
     public BygningDTO Update(BygningDTO objDTO);
     public int Delete(int id);
     public BygningDTO Get(int id);
-    public List<BygningDTO> GetAll();
+    public IEnumerable<BygningDTO> GetAll();
 
 
 
