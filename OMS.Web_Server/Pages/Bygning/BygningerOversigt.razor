@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var byg in Bygninger)
+                    @foreach (var byg in Bygninger)
                     {
                         <tr>
                             <td>@byg.Navn</td>
@@ -33,6 +33,21 @@
                 </tbody>
             </table>
         }
+        else
+        {
+            if (IsLoading)
+            {
+                <div class="text-center">
+                    <img src="/images/loading.gif">
+                    <p>Henter Data...</p>
+                </div>
+            }
+            else
+            {
+                <p>Ingen data</p>
+            }
+
+        }
     </div>
 
 </div>
@@ -41,8 +56,16 @@
 @code {
     private IEnumerable<BygningDTO> Bygninger { get; set; } = new List<BygningDTO>();
 
-    protected override void OnInitialized()
+    public bool IsLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
     {
+        await Task.Run(LoadBygninger);
+    }
+
+    private void LoadBygninger()
+    {
+        
         Bygninger = _bygningRepository.GetAll();
     }
 }
