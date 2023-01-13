@@ -1,0 +1,48 @@
+﻿@page "/bygninger"
+
+@inject IBygningRepository _bygningRepository
+@inject NavigationManager _navigationManager
+
+<h3>Bygninger</h3>
+
+<div class="row mt-4">
+    <div class="col-6">
+        <h4 class="card-title text-primary">Bygningsoversigt</h4>
+    </div>
+    <div class="col-4 offset-2">
+        <a href="bygninger/opret" class="btn btn-primary form-control">Opret ny bygning</a>
+    </div>
+    <div class="col-12">
+        @if (Bygninger.Any())
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var byg in Bygninger)
+                    {
+                        <tr>
+                            <td>@byg.Navn</td>
+                            <td><a href="#" class="btn btn-primary">Rediger</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+</div>
+
+
+@code {
+    private IEnumerable<BygningDTO> Bygninger { get; set; } = new List<BygningDTO>();
+
+    protected override void OnInitialized()
+    {
+        Bygninger = _bygningRepository.GetAll();
+    }
+}

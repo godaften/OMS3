@@ -1,0 +1,38 @@
+﻿@page "/bygninger/opret"
+
+@inject IBygningRepository _bygningRepository
+@inject NavigationManager _navigationManager
+
+<div class="row my-2">
+    <h3 class="card-title text-primary mb-3  ml-3">@Title Bygning</h3>
+    <div class="col-10">
+
+        <EditForm Model="Bygning" OnValidSubmit
+            ="UpsertBygning">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            <div class="form-group">
+                <label>Navn</label>
+                <InputText @bind-Value="@Bygning.Navn" class="form-control"></InputText>
+            </div>
+            <div class="form-group py-2">
+                <button class="btn btn-primary">@Title</button>
+                <a href="bygninger" class="btn btn-secondary">Tilbage til bygningsoversigt</a>
+            </div>
+        </EditForm>
+    </div>
+
+
+</div>
+
+@code {
+    private BygningDTO Bygning { get; set; } = new BygningDTO();
+    private string Title { get; set; } = "Opret";
+
+    private void UpsertBygning()
+    {
+        _bygningRepository.Create(Bygning);
+        _navigationManager.NavigateTo("bygninger");
+    }
+
+}

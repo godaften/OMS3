@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OMS.Business\OMS.Business.csproj" />
     <ProjectReference Include="..\OMS.DataAccess\OMS.DataAccess.csproj" />
   </ItemGroup>
 
