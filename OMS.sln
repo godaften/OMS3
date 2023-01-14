@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMS.Web_Server", "OMS.Web_Server\OMS.Web_Server.csproj", "{53F8B3C7-A87D-4BD7-AF00-A4A6EEBA995A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMS.Web_Server", "OMS.Web_Server\OMS.Web_Server.csproj", "{53F8B3C7-A87D-4BD7-AF00-A4A6EEBA995A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMS.Models", "OMS.Models\OMS.Models.csproj", "{CE7CF3B5-3EDE-41AB-98A7-534F41C0567C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMS.ModelsDTO", "OMS.Models\OMS.ModelsDTO.csproj", "{CE7CF3B5-3EDE-41AB-98A7-534F41C0567C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMS.Business", "OMS.Business\OMS.Business.csproj", "{DA2360CE-FCEE-4F05-89B7-D3D9C319510C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMS.Business", "OMS.Business\OMS.Business.csproj", "{DA2360CE-FCEE-4F05-89B7-D3D9C319510C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMS.Common", "OMS.Common\OMS.Common.csproj", "{C014F85A-6E4B-49DF-BB66-847C058E8DAF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMS.DataAccess", "OMS.DataAccess\OMS.DataAccess.csproj", "{35FC52AE-0586-41B5-80C2-E9D557FA2D11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OMS.DataAccess", "OMS.DataAccess\OMS.DataAccess.csproj", "{35FC52AE-0586-41B5-80C2-E9D557FA2D11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{DA2360CE-FCEE-4F05-89B7-D3D9C319510C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA2360CE-FCEE-4F05-89B7-D3D9C319510C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA2360CE-FCEE-4F05-89B7-D3D9C319510C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C014F85A-6E4B-49DF-BB66-847C058E8DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C014F85A-6E4B-49DF-BB66-847C058E8DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C014F85A-6E4B-49DF-BB66-847C058E8DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C014F85A-6E4B-49DF-BB66-847C058E8DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35FC52AE-0586-41B5-80C2-E9D557FA2D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{35FC52AE-0586-41B5-80C2-E9D557FA2D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35FC52AE-0586-41B5-80C2-E9D557FA2D11}.Release|Any CPU.ActiveCfg = Release|Any CPU

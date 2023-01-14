@@ -1,8 +1,10 @@
-﻿@page "/bygninger"
+﻿@page "/bygninger2"
 
 @inject IBygningRepository _bygningRepository
 @inject NavigationManager _navigationManager
+@inject IJSRuntime _jsRuntime
 
+<_DeleteConfirm></_DeleteConfirm>
 <div class="row mt-4">
     <div class="col-6">
         <h4 class="card-title text-primary">Bygningsoversigt</h4>
@@ -58,12 +60,10 @@
 
     private int DeleteBygningId { get; set; } = 0;
 
-
     protected override async Task OnInitializedAsync()
     {
         await Task.Run(LoadBygninger);
     }
-
 
     private void LoadBygninger()
     {
@@ -74,10 +74,8 @@
     private void HandleDelete(int id)
     {
         DeleteBygningId = id;
-        _bygningRepository.Delete(DeleteBygningId);
- 
-        LoadBygninger();
-
+        _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
     }
+
 
 }

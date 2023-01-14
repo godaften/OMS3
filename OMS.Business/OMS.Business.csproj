@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OMS.DataAccess\OMS.DataAccess.csproj" />
-    <ProjectReference Include="..\OMS.Models\OMS.Models.csproj" />
+    <ProjectReference Include="..\OMS.Models\OMS.ModelsDTO.csproj" />
   </ItemGroup>
 
 </Project>

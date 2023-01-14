@@ -1,37 +1,80 @@
 ﻿@page "/bygninger/opret"
+@page "/bygninger/rediger/{id:int}"
 
 @inject IBygningRepository _bygningRepository
 @inject NavigationManager _navigationManager
 
 <div class="row my-2">
-    <h3 class="card-title text-primary mb-3  ml-3">@Title Bygning</h3>
+    <h3 class="card-title text-primary mb-3  ml-3">@Title @Bygning.Navn</h3>
     <div class="col-10">
-
-        <EditForm Model="Bygning" OnValidSubmit
-            ="UpsertBygning">
-            <DataAnnotationsValidator/>
-            <ValidationSummary/>
-            <div class="form-group">
-                <label>Navn</label>
-                <InputText @bind-Value="@Bygning.Navn" class="form-control"></InputText>
+        @if (IsLoading)
+        {
+            <div class="text-center">
+                <img src="/images/loading.gif">
+                <p>Henter Data...</p>
             </div>
-            <div class="form-group py-2">
-                <button class="btn btn-primary">@Title</button>
-                <a href="bygninger" class="btn btn-secondary">Tilbage til bygningsoversigt</a>
-            </div>
-        </EditForm>
+        }
+        else
+        {
+            <EditForm Model="Bygning" OnValidSubmit="UpsertBygning">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group">
+                    <label>Navn</label>
+                    <InputText @bind-Value="@Bygning.Navn" class="form-control"></InputText>
+                </div>
+                <div class="form-group py-2">
+                    <button type="submit" class="btn btn-primary">@BtnTitle</button>
+                    <a href="bygninger" class="btn btn-outline-primary">Tilbage til bygningsoversigt</a>
+                </div>
+            </EditForm>
+        }
     </div>
-
 
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
+
     private BygningDTO Bygning { get; set; } = new BygningDTO();
+
     private string Title { get; set; } = "Opret";
+
+    private string BtnTitle { get; set; } = "Gem";
+
+    public bool IsLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id == 0)
+        {
+            IsLoading = false;
+        }
+        else
+        {
+            Title = "Rediger";
+            await Task.Run(LoadBygning);
+        }
+
+    }
+
+    private void LoadBygning()
+    {
+        Bygning = _bygningRepository.Get(Id);
+        IsLoading = false;
+    }
 
     private void UpsertBygning()
     {
-        _bygningRepository.Create(Bygning);
+        if (Bygning.Id == 0)
+        {
+            _bygningRepository.Create(Bygning);
+        }
+        else
+        {
+            _bygningRepository.Update(Bygning);
+        }
         _navigationManager.NavigateTo("bygninger");
     }
 

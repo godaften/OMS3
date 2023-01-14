@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Bygning\OversigtBygninger.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -18,10 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\OMS.Business\OMS.Business.csproj" />
     <ProjectReference Include="..\OMS.DataAccess\OMS.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
 </Project>
